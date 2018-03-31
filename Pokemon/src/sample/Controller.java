@@ -24,37 +24,7 @@ public class Controller {
     ObservableList list = FXCollections.observableArrayList();
 
     public void initialize()  {
-
-        String fileName = "Pokemon List.txt";
-
-        String line = null;
-
-        try{
-            FileReader fileReader = new FileReader(fileName);
-
-
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            while((line = bufferedReader.readLine()) != null) {
-               list.add(line);
-            }
-            PokemonList.getItems().addAll(list);
-
-            bufferedReader.close();
-        }
-        catch(FileNotFoundException ex) {
-            System.out.println(
-                    "Unable to open file '" +
-                            fileName + "'");
-        }
-        catch(IOException ex) {
-            System.out.println(
-                    "Error reading file '"
-                            + fileName + "'");
-            // Or we could just do this:
-            // ex.printStackTrace();
-        }
-
+        loadData();
     }
 
     @FXML
@@ -73,6 +43,39 @@ public class Controller {
     @FXML
     public void testButton(ActionEvent e) {
         textField.setText("Hey");
+    }
+
+    public void loadData(){
+        //Read File to populate Listview
+        String fileName = "Pokemon List.txt";
+
+        String line = null;
+
+        try{
+            FileReader fileReader = new FileReader(fileName);
+
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                list.add(line);
+            }
+            PokemonList.getItems().addAll(list);
+
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" +
+                            fileName + "'");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + fileName + "'");
+            // Or we could just do this:
+            // ex.printStackTrace();
+        }
+
     }
 
 
