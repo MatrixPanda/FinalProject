@@ -20,6 +20,8 @@ public class Main extends Application {
     private ArrayList<Monster> pokemonObjectArrayList = new ArrayList<>();
     private ArrayList<Move> moveObjectArrayList = new ArrayList<>();
     private ArrayList<Monster> randRolledPokemonList = new ArrayList<>();
+    Random rand = new Random(3);
+
 
     // Not needed anymore (delete later)
     private static int temp = 0;
@@ -43,7 +45,7 @@ public class Main extends Application {
         startBattle();
 
 
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
     }
 
@@ -62,10 +64,11 @@ public class Main extends Application {
 
     // Pick random pokemons to chose from
     private void randomPokemonList() {
-        Random rand = new Random();
+
         ArrayList<Integer> alreadyRolled = new ArrayList<Integer>();
+        int n = rand.nextInt(pokemonObjectArrayList.size());
         for (int i = 0; i < 3; i++) {
-            int n = rand.nextInt(pokemonObjectArrayList.size());
+
 
             while (alreadyRolled.contains(n)) {
                 n = rand.nextInt(pokemonObjectArrayList.size());
