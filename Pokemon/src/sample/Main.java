@@ -14,48 +14,71 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private static Player player;
-    private static Monster monster;
-    private static Move move;
-    private static ArrayList<Monster> pokemonObjectArrayList = new ArrayList<Monster>();
-    private static ArrayList<Move> moveObjectArrayList = new ArrayList<Move>();
+    private Player player;
+    private Monster monster;
+    private Move move;
+    private ArrayList<Monster> pokemonObjectArrayList = new ArrayList<>();
+    private ArrayList<Move> moveObjectArrayList = new ArrayList<>();
+    private ArrayList<Monster> randRolledPokemonList = new ArrayList<>();
 
     // Not needed anymore (delete later)
     private static int temp = 0;
-    private static Monster[] pokemonObjectArray = new Monster[2];
+    private static Monster[] pokemonObjectArray = new Monster[3];
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Pokemon Game");
+
+
+        summonPokemons();
+        randomPokemonList();
+
+        // For debugging list, remove later
+        System.out.print("Testing to see if random list is working: ");
+        System.out.println("1-" + randRolledPokemonList.get(0).getName() + " 2-" + randRolledPokemonList.get(1).getName() +
+                " 3-" + randRolledPokemonList.get(2).getName());
+
+        startBattle();
+
+
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
 
 
     // returns the correct Move object based on the name, returns null if doesn't exist.
-    public static Move readMove(String moveName) {
-        for (int i=0; i<moveObjectArrayList.size(); i++) {
-            if (moveObjectArrayList.get(i).getMoveName().equalsIgnoreCase(moveName)) {
-                return moveObjectArrayList.get(i);
+    private Move readMove(String moveName) {
+        for (Move move : moveObjectArrayList) {
+            if (move.getMoveName().equalsIgnoreCase(moveName)) {
+                return move;
             }
         }
-
         // Default move and in case if move spelling is wrong, insert first move by default so program doesn't CRASH!!!
         return moveObjectArrayList.get(0);
     }
 
 
-    public static void main(String[] args) {
-        // Self Notes for later
-        // Store monsters all into a list, the select the index for monster, OR type in name and search for the name in index and return?
-        // If pokemon's move type == self type, damge = 1.5x, if received dmg type == resisted.exist...else if doubled.exist...
-        // Use arraylist, can pass into array and convert to array later if needed.
-        // use .ignoreCase
-        // Add Status Moves later?? Moves usage count limited???
+    // Pick random pokemons to chose from
+    private void randomPokemonList() {
+        Random rand = new Random();
+        ArrayList<Integer> alreadyRolled = new ArrayList<Integer>();
+        for (int i = 0; i < 3; i++) {
+            int n = rand.nextInt(pokemonObjectArrayList.size());
+
+            while (alreadyRolled.contains(n)) {
+                n = rand.nextInt(pokemonObjectArrayList.size());
+            }
+            alreadyRolled.add(n);
+            randRolledPokemonList.add(pokemonObjectArrayList.get(n));
+        }
+    }
 
 
+    // Reads move file to create move objects and store it in moveObjectArrayList
+    // then Reads move file to create pokemon objects and store it in pokemonObjectArrayList
+    private void summonPokemons() {
         // Read move file to create move objects and store it in moveObjectArrayList
         try {
             // Read stats from file
@@ -84,7 +107,6 @@ public class Main extends Application {
             System.out.println("Something went wrong while reading the file");
             e.printStackTrace();
         }
-
 
         // Read move file to create pokemon objects and store it in pokemonObjectArrayList
         try {
@@ -116,16 +138,18 @@ public class Main extends Application {
                             readMove(move1), readMove(move2), readMove(move3),
                             readMove(move4));
                 }
-               // pokemonObjectArray[temp] = monster;
                 pokemonObjectArrayList.add(monster);
             }
         } catch (IOException e) {
             System.out.println("Something went wrong while reading the file");
             e.printStackTrace();
         }
+    }
 
+
+    // Function to let the battle begin!!!
+    private void startBattle() {
         player = new HumanPlayer(pokemonObjectArrayList.get(3));  // Pass in object selected from list UI later.
-
 
         monster = new Monster("Pikachu", "Electric", 142, 102, 61, 121,
                 readMove("Thunder"), readMove("Hidden Power Ice"), readMove("Fire Punch"),
@@ -168,8 +192,18 @@ public class Main extends Application {
             System.out.printf("You and %s are victorious!\n",
                     player.getMonster().getName());
         }
+    }
 
 
-        // launch(args);
+
+    public static void main(String[] args) {
+        // Self Notes for later
+        // Store monsters all into a list, the select the index for monster, OR type in name and search for the name in index and return?
+        // If pokemon's move type == self type, damage = 1.5x, if received dmg type == resisted.exist...else if doubled.exist...
+        // Use arraylist, can pass into array and convert to array later if needed.
+        // use .ignoreCase
+        // Add Status Moves later?? Moves usage count limited???
+
+        launch(args);
     }
 }
