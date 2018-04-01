@@ -52,7 +52,12 @@ public class Controller {
             textField.setText("Nothing Selected");
         }
         else{
-            textField.setText((list + " is selected"));
+            for (Monster m: randRolledPokemonList) {
+                if (m.getName() == list) {
+                    textField.setText((list + " selected HP: " + m.getHP() + " Speed: " + m.getSpeed() +
+                    " Attack: " + m.getAtk() + " Defense: " + m.getDef()));
+                }
+            }
         }
     }
     @FXML
