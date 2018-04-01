@@ -10,10 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.event.*;
 import javafx.scene.input.MouseEvent;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,9 +29,16 @@ public class Controller {
     private ArrayList<Monster> pokemonObjectArrayList = new ArrayList<>();
     private ArrayList<Move> moveObjectArrayList = new ArrayList<>();
     private ArrayList<Monster> randRolledPokemonList = new ArrayList<>();
+    private String selectedPokemon;
 
     @FXML private ListView<String> randomPokemonList;
     @FXML private ObservableList<String> items = FXCollections.observableArrayList();
+
+    private Socket client;
+    private String host = "localhost";
+    private int port = 8888;
+    private static PrintWriter pw = null;
+    private static int newHp = 0;
 
 
     public void initialize()  {
@@ -47,28 +52,51 @@ public class Controller {
     @FXML
     public void displaySelected(MouseEvent event) {
 
-        String list = randomPokemonList.getSelectionModel().getSelectedItem();
-        if(list ==  null || list.isEmpty()){
+        selectedPokemon = randomPokemonList.getSelectionModel().getSelectedItem();
+        if(selectedPokemon ==  null || selectedPokemon.isEmpty()){
             textField.setText("Nothing Selected");
         }
         else{
-            for (Monster m: randRolledPokemonList) {
-                if (m.getName() == list) {
-                    textField.setText((list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() +
-                                         "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed()));
-                }
-            }
+            textField.setText((selectedPokemon + " is selected"));
         }
+
     }
+
+
     @FXML
     public void testButton(ActionEvent e) {
-        textField.setText("Hey");
+       // textField.setText("Hey");
+       // connectToServer();
+        startBattle();
+       // connectToServer();
     }
 
 
     // Give function later
     public void someButtom() {
         System.out.println("testing someButton");
+    }
+
+
+    private void connectToServer() {
+        try {
+            client = new Socket(host, port);
+            System.out.println("Connected to server");
+            pw = new PrintWriter(client.getOutputStream(), true);
+            pw.println("ATTACK");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+       // startBattle();
+    private void disconnectFromServer() {
+        try {
+            client.close();
+            System.out.println("disconnected");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -198,18 +226,62 @@ public class Controller {
     }
 
 
+    // Send opponent their new hp value
+    private void sendHp(int hp) {
+        try {
+            DataOutputStream dos = new DataOutputStream(client.getOutputStream());
+
+            dos.writeUTF(String.valueOf(hp));
+
+            dos.close();
+        } catch (IOException e) {
+            System.err.println("Error reading from server.");
+        }
+    }
+
+
+    private void updateHp() {
+        try {
+            client = new Socket(host, port);
+            System.out.println("CONNECTED");
+            pw = new PrintWriter(client.getOutputStream(), true);
+            pw.println("UPDATEhp");  // selectedf is second token in server code, passed in as file name
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            DataInputStream dis = new DataInputStream(client.getInputStream());
+            String temp = dis.readUTF();
+            newHp = Integer.valueOf(temp);
+            System.out.println("THIS IS THE NEW UPDATED HP: " + newHp);
+            dis.close();
+        } catch (IOException e) {
+            System.err.println("Error reading from socket.");
+        }
+        try {
+            client.close();
+            System.out.println("disconnected" + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     // Function to let the battle begin!!!
     private void startBattle() {
-        player = new HumanPlayer(pokemonObjectArrayList.get(3));  // Pass in object selected from list UI later.
 
-        monster = new Monster("Pikachu", "Electric", 142, 102, 61, 121,
+      //  player = new HumanPlayer(pokemonObjectArrayList.get(3));  // Pass in object selected from list UI later.
+        player = new HumanPlayer(readPokemon(selectedPokemon));
+
+        monster = new Monster("Pikachu", "Electric", 242, 102, 61, 121,
                 readMove("Thunder"), readMove("Hidden Power Ice"), readMove("Fire Punch"),
                 readMove("Air Slash"));
 
         Player enemy = new CPUPlayer(monster);
 
-        while ((!player.hasLost()) && (!enemy.hasLost())) {
+        int isFaster = 1;  // Checks if this pokemon is faster than opponent. 1 is true, 0 is false.
+
             // print both Pokemon's HP
             System.out.println("");
             System.out.printf("%s has %d HP\n",
@@ -219,31 +291,36 @@ public class Controller {
                     enemy.getMonster().getName(),
                     enemy.getMonster().getHP());
 
-            // decide the next move
-            int playerMove = player.chooseMove();
-            int enemyMove = enemy.chooseMove();
+        switch(isFaster) {
+            case 1: // decide the next move
+                int playerMove = player.chooseMove();
+                int enemyMove = enemy.chooseMove();
 
-            // execute the next move
-            if (player.isFasterThan(enemy)) {
-                player.attack(enemy, playerMove);
-                if (!enemy.hasLost()) {
+                // execute the next move
+                if (player.isFasterThan(enemy)) {
+                    int newHp = player.attack(enemy, playerMove);
+
+                    connectToServer();
+                    System.out.println("NEW HP VALUE TO SEND: " + newHp);
+                    sendHp(newHp);
+                    disconnectFromServer();
+
+                    if (!enemy.hasLost()) {
+                        enemy.attack(player, enemyMove);
+                    }
+                } else {
                     enemy.attack(player, enemyMove);
+                    if (!player.hasLost()) {
+                        player.attack(enemy, playerMove);
+                    }
                 }
-            } else {
-                enemy.attack(player, enemyMove);
-                if (!player.hasLost()) {
-                    player.attack(enemy, playerMove);
-                }
-            }
+                break;
+
+
+            case 0: updateHp();
+                break;
         }
 
-        if (player.hasLost()) {
-            System.out.printf("You and %s have lost the battle.\n",
-                    player.getMonster().getName());
-        } else {
-            System.out.printf("You and %s are victorious!\n",
-                    player.getMonster().getName());
-        }
     }
 }
 
