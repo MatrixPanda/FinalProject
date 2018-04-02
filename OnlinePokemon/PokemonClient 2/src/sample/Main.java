@@ -25,6 +25,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
         // Self Notes for later
         // Store monsters all into a list, the select the index for monster, OR type in name and search for the name in index and return?
         // If pokemon's move type == self type, damage = 1.5x, if received dmg type == resisted.exist...else if doubled.exist...

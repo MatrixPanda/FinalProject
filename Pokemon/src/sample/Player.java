@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 
 
 // Represents	players	in	general
-abstract public class Player{
+abstract public class Player extends Controller{
 
     Monster monster;
 
@@ -23,6 +23,7 @@ abstract public class Player{
             return true;
         }
     }
+
 
     // Human player selects move through user input, CPU player randomly generates one
     abstract public int chooseMove();

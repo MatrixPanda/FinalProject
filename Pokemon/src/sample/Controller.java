@@ -27,6 +27,8 @@ public class Controller {
 //    private TextField textField;
     @FXML
     private TextArea textArea;
+    @FXML
+    public TextArea gameText;
 
     private Player player;
     private Monster monster;
@@ -42,9 +44,11 @@ public class Controller {
     public void initialize()  {
         summonPokemons();
         randomPokemonList();
+        randomPokemonList.setItems(populateList());
 
 
     }
+
 
 
     @FXML
@@ -72,7 +76,8 @@ public class Controller {
     }
     @FXML
     public void testButton(ActionEvent e) {
-        randomPokemonList.setItems(populateList());
+        startBattle();
+
 
     }
 
@@ -213,8 +218,7 @@ public class Controller {
 
     // Function to let the battle begin!!!
     private void startBattle() {
-        player = new HumanPlayer(pokemonObjectArrayList.get(3));  // Pass in object selected from list UI later.
-
+        player = new HumanPlayer(pokemonObjectArrayList.get(3));
         monster = new Monster("Pikachu", "Electric", 142, 102, 61, 121,
                 readMove("Thunder"), readMove("Hidden Power Ice"), readMove("Fire Punch"),
                 readMove("Air Slash"));
@@ -223,13 +227,12 @@ public class Controller {
 
         while ((!player.hasLost()) && (!enemy.hasLost())) {
             // print both Pokemon's HP
-            System.out.println("");
-            System.out.printf("%s has %d HP\n",
-                    player.getMonster().getName(),
-                    player.getMonster().getHP());
-            System.out.printf("%s has %d HP\n",
-                    enemy.getMonster().getName(),
-                    enemy.getMonster().getHP());
+            gameText.setText("");
+
+
+            gameText.setText(player.getMonster().getName() + " has "+  player.getMonster().getHP()+"HP\n");
+            gameText.setText(enemy.getMonster().getName() + " has "+  enemy.getMonster().getHP()+"HP\n");
+
 
             // decide the next move
             int playerMove = player.chooseMove();
@@ -250,11 +253,10 @@ public class Controller {
         }
 
         if (player.hasLost()) {
-            System.out.printf("You and %s have lost the battle.\n",
-                    player.getMonster().getName());
+            gameText.setText("You and " + player.getMonster().getName() + "have lost the battle.\n");
+
         } else {
-            System.out.printf("You and %s are victorious!\n",
-                    player.getMonster().getName());
+            gameText.setText("You and " + player.getMonster().getName() + "are victorious!\n");
         }
     }
 }
