@@ -61,11 +61,11 @@ public class Controller {
                     //textField.setText((list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() + "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed()));
                     textArea.setText(list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() +
                                     "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed() + "\nMoves: \n"
-                            + m.move1.getMoveName() + " - Power: " + m.move1.getPower() + " Accuracy: " +
-                            m.move1.getAccuracy() + "\n" + m.move2.getMoveName() + " - Power: " + m.move2.getPower() +
-                            " Accuracy: " + m.move2.getAccuracy() + "\n" + m.move3.getMoveName() + " - Power: " +
-                            m.move3.getPower() + " Accuracy: " + m.move3.getAccuracy() + "\n" + m.move4.getMoveName() +
-                            " - Power: " + m.move4.getPower() + " Accuracy: " + m.move4.getAccuracy());
+                            + m.move1.getMoveName() + ":\t\t\tPower: " + m.move1.getPower() + " \tAccuracy: " +
+                            m.move1.getAccuracy() + "\n" + m.move2.getMoveName() + ":\t\t\t\tPower: " + m.move2.getPower() +
+                            " \tAccuracy: " + m.move2.getAccuracy() + "\n" + m.move3.getMoveName() + ":\t\t\tPower: " +
+                            m.move3.getPower() + " \tAccuracy: " + m.move3.getAccuracy() + "\n" + m.move4.getMoveName() +
+                            ":\t\t\tPower: " + m.move4.getPower() + " Accuracy: " + m.move4.getAccuracy());
                 }
             }
         }
@@ -73,6 +73,7 @@ public class Controller {
     @FXML
     public void testButton(ActionEvent e) {
         randomPokemonList.setItems(populateList());
+
     }
 
 

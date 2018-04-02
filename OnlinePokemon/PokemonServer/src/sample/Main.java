@@ -18,7 +18,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        PokemonServer ps = new PokemonServer(8888);
+        //PokemonServer ps = new PokemonServer(8888);
         ps.start();
       //  launch(args);
     }

@@ -7,11 +7,11 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Styling.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="border-pane" stylesheets="@Styling.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <top>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button alignment="CENTER" contentDisplay="CENTER" onAction="#testButton" styleClass="test-button" text="Choose Pokemon!" textAlignment="CENTER" />
+          <Button alignment="CENTER" contentDisplay="CENTER" onAction="#testButton" prefHeight="26.0" prefWidth="155.0" styleClass="test-button" text="Choose Pokemon!" textAlignment="CENTER" />
         </buttons>
       </ButtonBar>
    </top>
