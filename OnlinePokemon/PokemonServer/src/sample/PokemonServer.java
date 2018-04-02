@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
-public class FileServer extends Thread {
+public class PokemonServer extends Thread {
 
     private ServerSocket server;
     private Socket client;
@@ -14,7 +14,7 @@ public class FileServer extends Thread {
     private static int newHpReceived = 0;
 
 
-    public FileServer(int port) {
+    public PokemonServer(int port) {
         try {
             server = new ServerSocket(port);
         } catch (IOException e) {
@@ -36,7 +36,6 @@ public class FileServer extends Thread {
 
                 if (command.equalsIgnoreCase("ATTACK")) {
                     receiveHp(client);
-                   // sendHpAway(newHpReceived);
                 } else if (command.equalsIgnoreCase("UPDATEhp")) {
                     sendHpAway(newHpReceived);
                 }
