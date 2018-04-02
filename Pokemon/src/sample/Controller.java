@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import javafx.event.*;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class Controller {
 
     @FXML
-    private TextField textField;
+    private TextArea textArea;
 
     private Player player;
     private Monster monster;
@@ -49,20 +50,21 @@ public class Controller {
 
         String list = randomPokemonList.getSelectionModel().getSelectedItem();
         if(list ==  null || list.isEmpty()){
-            textField.setText("Nothing Selected");
+            textArea.setText("Nothing Selected");
         }
         else{
             for (Monster m: randRolledPokemonList) {
                 if (m.getName() == list) {
-                    textField.setText((list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() +
-                                         "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed()));
+                    textArea.setText(list + " selected HP: " + m.getHP() + " Speed: " + m.getSpeed() +
+                            " Attack: " + m.getAtk() + " Defense: " + m.getDef() + ". \nMoves: " + m.move1.getMoveName() + ", "
+                            + m.move2.getMoveName() + ", " + m.move3.getMoveName() + ", " + m.move4.getMoveName() +".");
                 }
             }
         }
     }
     @FXML
     public void testButton(ActionEvent e) {
-        textField.setText("Hey");
+        textArea.setText("Hey");
     }
 
 
