@@ -34,11 +34,16 @@ public class Controller {
     @FXML private ListView<String> randomPokemonList;
     @FXML private ObservableList<String> items = FXCollections.observableArrayList();
 
-    private Socket client;
+    private Socket connection;
     private String host = "localhost";
     private int port = 8888;
     private static PrintWriter pw = null;
     private static int newHp = 1;
+
+    private String foundPlayer = "no";
+
+    private DataInputStream dis;
+    private DataOutputStream dos;
 
 
     public void initialize()  {
@@ -46,6 +51,8 @@ public class Controller {
         randomPokemonList();
 
         randomPokemonList.setItems(populateList());
+
+      //  simpleConnect();
     }
 
 
@@ -65,14 +72,26 @@ public class Controller {
 
     @FXML
     public void testButton(ActionEvent e) {
-       // textField.setText("Hey");
-       // connectToServer();
 
         // While newHp !=0...
        // for (int i=0; i<2; i++) {  // turn into while no one lost yet, add other button methods into this button
+        /*
+        try {
+            connection = new Socket(host, port);
+            System.out.println("Searching for opponent...\n");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        boolean foundOpponent = false;
+        while(!foundOpponent) {
+            foundOpponent = searchPlayers();
+        }
+        */
             startBattle();
        // }
        // connectToServer();
+
     }
 
 
@@ -82,11 +101,33 @@ public class Controller {
     }
 
 
+    private boolean searchPlayers() {
+        try {
+            dis = new DataInputStream(connection.getInputStream());
+            foundPlayer = dis.readUTF();
+            System.out.println("Found: " + foundPlayer);
+            dis.close();
+
+            if (foundPlayer.equalsIgnoreCase("yes")) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error reading from socket.");
+            System.exit(0);
+        }
+
+        return false;
+    }
+
+
     private void connectToServer() {
         try {
-            client = new Socket(host, port);
+            connection = new Socket(host, port);
             System.out.println("Connected to server");
-            pw = new PrintWriter(client.getOutputStream(), true);
+            pw = new PrintWriter(connection.getOutputStream(), true);
             pw.println("ATTACK");
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +137,7 @@ public class Controller {
        // startBattle();
     private void disconnectFromServer() {
         try {
-            client.close();
+            connection.close();
             System.out.println("disconnected");
         } catch (IOException e) {
             e.printStackTrace();
@@ -233,7 +274,7 @@ public class Controller {
     // Send opponent their new hp value
     private void sendHp(int hp) {
         try {
-            DataOutputStream dos = new DataOutputStream(client.getOutputStream());
+            dos = new DataOutputStream(connection.getOutputStream());
 
             dos.writeUTF(String.valueOf(hp));
 
@@ -246,15 +287,15 @@ public class Controller {
 
     private void updateHp() {
         try {
-            client = new Socket(host, port);
+            connection = new Socket(host, port);
             System.out.println("CONNECTED");
-            pw = new PrintWriter(client.getOutputStream(), true);
+            pw = new PrintWriter(connection.getOutputStream(), true);
             pw.println("UPDATEhp");  // selectedf is second token in server code, passed in as file name
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            DataInputStream dis = new DataInputStream(client.getInputStream());
+            dis = new DataInputStream(connection.getInputStream());
             String temp = dis.readUTF();
             newHp = Integer.valueOf(temp);
             System.out.println("THIS IS THE NEW UPDATED HP: " + newHp);
@@ -263,11 +304,31 @@ public class Controller {
             System.err.println("Error reading from socket.");
         }
         try {
-            client.close();
+            connection.close();
             System.out.println("disconnected" + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void simpleConnect() {
+        try {
+            connection = new Socket(host, port);
+            System.out.println("Searching for opponent...\n");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // Set up streams
+    private void setUpStreams() throws IOException{
+        dos = new DataOutputStream(connection.getOutputStream());
+        dos.flush();
+
+        dis = new DataInputStream(connection.getInputStream());
+
+        System.out.println("Streams are now setup \n");
     }
 
 
@@ -283,6 +344,21 @@ public class Controller {
                 readMove("Air Slash"));
 
         Player enemy = new CPUPlayer(monster);
+
+        // Wait for other player to connect then start battle when they connect
+        simpleConnect();
+
+        try {
+            setUpStreams();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        boolean foundOpponent = false;
+        while(!foundOpponent) {
+            foundOpponent = searchPlayers();
+        }
 
             // print both Pokemon's HP
             System.out.println("");
@@ -307,7 +383,7 @@ public class Controller {
                 System.out.println("NEW HP VALUE TO SEND: " + newHp);
                 sendHp(newHp);
 
-                disconnectFromServer();
+               // disconnectFromServer();
                 break;
 
 

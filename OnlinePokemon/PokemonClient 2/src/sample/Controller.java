@@ -34,7 +34,7 @@ public class Controller {
     @FXML private ListView<String> randomPokemonList;
     @FXML private ObservableList<String> items = FXCollections.observableArrayList();
 
-    private Socket client;
+    private Socket connection;
     private String host = "localhost";
     private int port = 8888;
     private static PrintWriter pw = null;
@@ -69,6 +69,14 @@ public class Controller {
        // connectToServer();
         startBattle();
        // connectToServer();
+        /*
+        try {
+            connection = new Socket(host, port);
+            System.out.println("Searching for opponent...\n");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        */
     }
 
 
@@ -80,9 +88,9 @@ public class Controller {
 
     private void connectToServer() {
         try {
-            client = new Socket(host, port);
+            connection = new Socket(host, port);
             System.out.println("Connected to server");
-            pw = new PrintWriter(client.getOutputStream(), true);
+            pw = new PrintWriter(connection.getOutputStream(), true);
             pw.println("ATTACK");
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,7 +100,7 @@ public class Controller {
        // startBattle();
     private void disconnectFromServer() {
         try {
-            client.close();
+            connection.close();
             System.out.println("disconnected");
         } catch (IOException e) {
             e.printStackTrace();
@@ -229,7 +237,7 @@ public class Controller {
     // Send opponent their new hp value
     private void sendHp(int hp) {
         try {
-            DataOutputStream dos = new DataOutputStream(client.getOutputStream());
+            DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
 
             dos.writeUTF(String.valueOf(hp));
 
@@ -242,15 +250,16 @@ public class Controller {
 
     private void updateHp() {
         try {
-            client = new Socket(host, port);
+            connection = new Socket(host, port);
             System.out.println("CONNECTED");
-            pw = new PrintWriter(client.getOutputStream(), true);
+            pw = new PrintWriter(connection.getOutputStream(), true);
             pw.println("UPDATEhp");  // selectedf is second token in server code, passed in as file name
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         try {
-            DataInputStream dis = new DataInputStream(client.getInputStream());
+            DataInputStream dis = new DataInputStream(connection.getInputStream());
             String temp = dis.readUTF();
             newHp = Integer.valueOf(temp);
             System.out.println("THIS IS THE NEW UPDATED HP: " + newHp);
@@ -258,12 +267,14 @@ public class Controller {
         } catch (IOException e) {
             System.err.println("Error reading from socket.");
         }
+/*
         try {
-            client.close();
+            connection.close();
             System.out.println("disconnected" + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
+*/
     }
 
 

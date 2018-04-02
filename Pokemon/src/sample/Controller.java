@@ -57,7 +57,7 @@ public class Controller {
         }
         else{
             for (Monster m: randRolledPokemonList) {
-                if (m.getName() == list) {
+                if (m.getName().equalsIgnoreCase(list)) {
                     //textField.setText((list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() + "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed()));
                     textArea.setText(list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() +
                                     "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed() + "\nMoves: \n"
