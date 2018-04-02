@@ -23,12 +23,9 @@ import java.util.stream.Collectors;
 
 public class Controller {
 
+//    @FXML
+//    private TextField textField;
     @FXML
-<<<<<<< HEAD
-    private TextField textField;
-    @FXML
-=======
->>>>>>> 3ed39bfaa93297be6de588e527e8bbc3446eba84
     private TextArea textArea;
 
     private Player player;
@@ -55,16 +52,12 @@ public class Controller {
 
         String list = randomPokemonList.getSelectionModel().getSelectedItem();
         if(list ==  null || list.isEmpty()){
-<<<<<<< HEAD
-            textField.setText("Nothing Selected");
-=======
->>>>>>> 3ed39bfaa93297be6de588e527e8bbc3446eba84
+            //textField.setText("Nothing Selected");
             textArea.setText("Nothing Selected");
         }
         else{
             for (Monster m: randRolledPokemonList) {
                 if (m.getName() == list) {
-<<<<<<< HEAD
                     //textField.setText((list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() + "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed()));
                     textArea.setText(list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() +
                                     "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed() + "\nMoves: \n"
@@ -73,21 +66,13 @@ public class Controller {
                             " Accuracy: " + m.move2.getAccuracy() + "\n" + m.move3.getMoveName() + " - Power: " +
                             m.move3.getPower() + " Accuracy: " + m.move3.getAccuracy() + "\n" + m.move4.getMoveName() +
                             " - Power: " + m.move4.getPower() + " Accuracy: " + m.move4.getAccuracy());
-=======
-                    textArea.setText(list + " selected HP: " + m.getHP() + " Speed: " + m.getSpeed() +
-                            " Attack: " + m.getAtk() + " Defense: " + m.getDef() + ". \nMoves: " + m.move1.getMoveName() + ", "
-                            + m.move2.getMoveName() + ", " + m.move3.getMoveName() + ", " + m.move4.getMoveName() +".");
->>>>>>> 3ed39bfaa93297be6de588e527e8bbc3446eba84
                 }
             }
         }
     }
     @FXML
     public void testButton(ActionEvent e) {
-<<<<<<< HEAD
-        textField.setText("Hey");
-=======
->>>>>>> 3ed39bfaa93297be6de588e527e8bbc3446eba84
+        //textField.setText("Hey");
         textArea.setText("Hey");
     }
 
