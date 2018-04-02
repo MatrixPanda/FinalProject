@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import javafx.event.*;
@@ -24,6 +25,8 @@ public class Controller {
 
     @FXML
     private TextField textField;
+    @FXML
+    private TextArea textArea;
 
     private Player player;
     private Monster monster;
@@ -50,13 +53,19 @@ public class Controller {
         String list = randomPokemonList.getSelectionModel().getSelectedItem();
         if(list ==  null || list.isEmpty()){
             textField.setText("Nothing Selected");
+            textArea.setText("Nothing Selected");
         }
         else{
             for (Monster m: randRolledPokemonList) {
                 if (m.getName() == list) {
-                    textField.setText(list + " selected HP: " + m.getHP() + " Speed: " + m.getSpeed() +
-                            " Attack: " + m.getAtk() + " Defense: " + m.getDef() + " Moves: " + m.move1.getMoveName() + " "
-                            + m.move2.getMoveName() + " " + m.move3.getMoveName() + " " + m.move4.getMoveName());
+                    //textField.setText((list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() + "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed()));
+                    textArea.setText(list + " selected ->  HP: " + m.getHP() + "   Attack: " + m.getAtk() +
+                                    "   Defense: " + m.getDef() + "   Speed: " + m.getSpeed() + "\nMoves: \n"
+                            + m.move1.getMoveName() + " - Power: " + m.move1.getPower() + " Accuracy: " +
+                            m.move1.getAccuracy() + "\n" + m.move2.getMoveName() + " - Power: " + m.move2.getPower() +
+                            " Accuracy: " + m.move2.getAccuracy() + "\n" + m.move3.getMoveName() + " - Power: " +
+                            m.move3.getPower() + " Accuracy: " + m.move3.getAccuracy() + "\n" + m.move4.getMoveName() +
+                            " - Power: " + m.move4.getPower() + " Accuracy: " + m.move4.getAccuracy());
                 }
             }
         }
@@ -64,7 +73,9 @@ public class Controller {
     @FXML
     public void testButton(ActionEvent e) {
         textField.setText("Hey");
+        textArea.setText("Hey");
     }
+
 
 
     // Give function later
