@@ -38,7 +38,7 @@ public class Controller {
     private String host = "localhost";
     private int port = 8888;
     private static PrintWriter pw = null;
-    private static int newHp = 0;
+    private static int newHp = 1;
 
 
     public void initialize()  {
@@ -286,36 +286,22 @@ public class Controller {
                 enemy.getMonster().getName(),
                 enemy.getMonster().getHP());
 
+        int playerMove = player.chooseMove();
+
         int isFaster = 0;  // Checks if this pokemon is faster than opponent. 1 is true, 0 is false.
-
         switch(isFaster) {
-            case 1: // decide the next move
-                int playerMove = player.chooseMove();
-                int enemyMove = enemy.chooseMove();
+            case 1:     // Attack first
+                connectToServer();
 
-                // execute the next move
-                if (player.isFasterThan(enemy)) {
-                    int newHp = player.attack(enemy, playerMove);
+                int newHp = player.attack(enemy, playerMove);
+                System.out.println("NEW HP VALUE TO SEND: " + newHp);
+                sendHp(newHp);
+                disconnectFromServer();
+                break;
 
-                    connectToServer();
-                    System.out.println("NEW HP VALUE TO SEND: " + newHp);
-                    sendHp(newHp);
-                    disconnectFromServer();
-
-                    if (!enemy.hasLost()) {
-                        enemy.attack(player, enemyMove);
-                    }
-                } else {
-                    enemy.attack(player, enemyMove);
-                    if (!player.hasLost()) {
-                        player.attack(enemy, playerMove);
-                    }
-                }
-                    break;
-
-
-            case 0: updateHp();
-                    break;
+            case 0:     // Get attacked first
+                updateHp();
+                break;
         }
 
     }

@@ -73,11 +73,12 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2365">
-              <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+            <state relative-caret-position="1353">
+              <caret line="296" column="69" lean-forward="true" selection-start-line="296" selection-start-column="69" selection-end-line="296" selection-end-column="69" />
               <folding>
                 <element signature="e#1929#1930#0" expanded="true" />
                 <element signature="e#1985#1986#0" expanded="true" />
+                <element signature="e#2738#2747#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -183,23 +184,24 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="PokemonClient" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PokemonClient" type="462c0819:PsiDirectoryNode" />
+              <item name="PokemonClient 2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PokemonClient 2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="PokemonClient" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PokemonClient" type="462c0819:PsiDirectoryNode" />
+              <item name="PokemonClient 2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PokemonClient 2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="PokemonClient" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PokemonClient" type="462c0819:PsiDirectoryNode" />
+              <item name="PokemonClient 2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PokemonClient 2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -207,8 +209,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -222,7 +223,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../FinalProject/Pokemon" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="recentsLimit" value="5" />
   </component>
   <component name="RunDashboard">
@@ -387,7 +388,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32154697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32154697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -837,11 +838,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2365">
-          <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+        <state relative-caret-position="1353">
+          <caret line="296" column="69" lean-forward="true" selection-start-line="296" selection-start-column="69" selection-end-line="296" selection-end-column="69" />
           <folding>
             <element signature="e#1929#1930#0" expanded="true" />
             <element signature="e#1985#1986#0" expanded="true" />
+            <element signature="e#2738#2747#0" expanded="true" />
           </folding>
         </state>
       </provider>

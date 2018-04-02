@@ -19,9 +19,13 @@
       <ListView fx:id="randomPokemonList" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
+<<<<<<< HEAD
       <TextArea fx:id="textArea" prefHeight="63.0" prefWidth="600.0" BorderPane.alignment="CENTER">>
+=======
+      <TextArea fx:id="textArea" prefHeight="109.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+>>>>>>> 3ed39bfaa93297be6de588e527e8bbc3446eba84
          <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
       </TextArea>
    </bottom>

@@ -18,8 +18,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        FileServer fs = new FileServer(8888);
-        fs.start();
+        PokemonServer ps = new PokemonServer(8888);
+        ps.start();
       //  launch(args);
     }
 }

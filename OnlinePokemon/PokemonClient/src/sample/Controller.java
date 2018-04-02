@@ -38,7 +38,7 @@ public class Controller {
     private String host = "localhost";
     private int port = 8888;
     private static PrintWriter pw = null;
-    private static int newHp = 0;
+    private static int newHp = 1;
 
 
     public void initialize()  {
@@ -67,7 +67,11 @@ public class Controller {
     public void testButton(ActionEvent e) {
        // textField.setText("Hey");
        // connectToServer();
-        startBattle();
+
+        // While newHp !=0...
+       // for (int i=0; i<2; i++) {  // turn into while no one lost yet, add other button methods into this button
+            startBattle();
+       // }
        // connectToServer();
     }
 
@@ -280,8 +284,6 @@ public class Controller {
 
         Player enemy = new CPUPlayer(monster);
 
-        int isFaster = 1;  // Checks if this pokemon is faster than opponent. 1 is true, 0 is false.
-
             // print both Pokemon's HP
             System.out.println("");
             System.out.printf("%s has %d HP\n",
@@ -291,19 +293,48 @@ public class Controller {
                     enemy.getMonster().getName(),
                     enemy.getMonster().getHP());
 
+
+        int playerMove = player.chooseMove();
+
+        int isFaster = 1;  // Checks if this pokemon is faster than opponent. 1 is true, 0 is false.
         switch(isFaster) {
+            case 1:     // Attack first
+
+                connectToServer();
+
+                int newHp = player.attack(enemy, playerMove);
+
+                System.out.println("NEW HP VALUE TO SEND: " + newHp);
+                sendHp(newHp);
+
+                disconnectFromServer();
+                break;
+
+
+            case 0:     // Get attacked first
+                updateHp();
+                break;
+        }
+
+    }
+}
+
+
+
+
+/* // For reference, REMOVE later:
+ switch(isFaster) {
             case 1: // decide the next move
-                int playerMove = player.chooseMove();
-                int enemyMove = enemy.chooseMove();
 
                 // execute the next move
-                if (player.isFasterThan(enemy)) {
+                connectToServer();
+                if (player.isFasterThan(enemy)) {  // remove this from here later
                     int newHp = player.attack(enemy, playerMove);
 
-                    connectToServer();
+                  //  connectToServer();        // Putting it here results in readUTD unsignedInt bug sometimes
                     System.out.println("NEW HP VALUE TO SEND: " + newHp);
                     sendHp(newHp);
-                    disconnectFromServer();
+                  //  disconnectFromServer();  // Putting it here results in readUTD unsignedInt bug sometimes
 
                     if (!enemy.hasLost()) {
                         enemy.attack(player, enemyMove);
@@ -314,13 +345,12 @@ public class Controller {
                         player.attack(enemy, playerMove);
                     }
                 }
+                disconnectFromServer();
                 break;
 
 
-            case 0: updateHp();
+            case 0:
+                updateHp();
                 break;
         }
-
-    }
-}
-
+ */
