@@ -43,7 +43,7 @@ public class Controller {
         summonPokemons();
         randomPokemonList();
 
-        randomPokemonList.setItems(populateList());
+
     }
 
 
@@ -72,8 +72,7 @@ public class Controller {
     }
     @FXML
     public void testButton(ActionEvent e) {
-        //textField.setText("Hey");
-        textArea.setText("Hey");
+        randomPokemonList.setItems(populateList());
     }
 
 
