@@ -20,18 +20,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PokemonServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PokemonClient 2/src/sample/PokemonServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#570#571#0" expanded="true" />
-                <element signature="e#625#626#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PokemonServer/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -260,16 +248,15 @@
       <option name="presentableId" value="Default" />
       <updated>1522618525982</updated>
       <workItem from="1522618527656" duration="961000" />
-      <workItem from="1522700854147" duration="1290000" />
+      <workItem from="1522700854147" duration="1524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2251000" />
+    <option name="totallyTimeSpent" value="2485000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1600" height="857" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -336,14 +323,7 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/PokemonClient 2/src/sample/PokemonServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#570#571#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/PokemonServer/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor" />
