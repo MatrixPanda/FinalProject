@@ -13,7 +13,7 @@ show selected pokemon's stats,
 Gradle build
 
 Adonis:
-
+UI designer
 
 
 To Run Code, in multiplayer run server, client 1, then client 2
