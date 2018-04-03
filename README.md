@@ -18,3 +18,4 @@ UI designer
 
 To Run Code, in multiplayer run server, client 1, then client 2
 Single player just run after game is over sends score data to server, server writes score to file.
+OPEN pokemon folder to see AI had some integration issues earlier with our codes.
