@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 
@@ -29,6 +30,8 @@ public class Controller {
     private TextArea textArea;
     @FXML
     public TextArea gameText;
+    @FXML
+    public TextField textField;
 
     private Player player;
     private Monster monster;
@@ -37,16 +40,41 @@ public class Controller {
     private ArrayList<Move> moveObjectArrayList = new ArrayList<>();
     private ArrayList<Monster> randRolledPokemonList = new ArrayList<>();
 
+
     @FXML private ListView<String> randomPokemonList;
     @FXML private ObservableList<String> items = FXCollections.observableArrayList();
     private String selectedPokemon;
+    public int moveSlot;
 
 
     public void initialize()  {
+
         summonPokemons();
         randomPokemonList();
         randomPokemonList.setItems(populateList());
+        textField.setPromptText("Enter Move Number");
 
+
+    }
+
+    public class HumanPlayer extends Player {
+
+        public HumanPlayer(Monster humanMonster) {
+            this.monster = humanMonster;
+        }
+
+        // User inputs a move number 1-4.
+        public int chooseMove() {
+
+            gameText.appendText(("Enter 1-4 to select a move: \n" + "1: " + monster.move1.getMoveName() + "  2: " + monster.move2.getMoveName() + "\n3: " + monster.move3.getMoveName() + "  4: " + monster.move4.getMoveName()+"\n"));
+
+            if (moveSlot > 4) {   // Checks for illegal values for move selected
+                moveSlot = 4;
+            } else if (moveSlot < 1) {
+                moveSlot = 1;
+            }
+            return moveSlot;
+        }
 
     }
 
@@ -77,17 +105,14 @@ public class Controller {
     }
     @FXML
     public void testButton(ActionEvent e) {
-       // gameText.setText("test");
+
+
+        moveSlot = Integer.parseInt(textField.getText());
+
         startBattle();
 
     }
 
-
-
-    // Give function later
-    public void someButtom() {
-        System.out.println("testing someButton");
-    }
 
 
 
@@ -229,12 +254,10 @@ public class Controller {
 
         while ((!player.hasLost()) && (!enemy.hasLost())) {
             // print both Pokemon's HP
-            gameText.setText("");
-            gameText.setText("test");
-            gameText.setText("test2");
 
-          //  gameText.setText(player.getMonster().getName());// + " has "+  player.getMonster().getHP()+"HP\n");
-           // gameText.setText(enemy.getMonster().getName());// + " has "+  enemy.getMonster().getHP()+"HP\n");
+
+            gameText.appendText(player.getMonster().getName()  + " has "+  player.getMonster().getHP()+"HP\n");
+            gameText.appendText(enemy.getMonster().getName() + " has "+  enemy.getMonster().getHP()+"HP\n");
 
 
             // decide the next move
@@ -256,10 +279,10 @@ public class Controller {
         }
 
         if (player.hasLost()) {
-          //  gameText.setText("You and " + player.getMonster().getName() + "have lost the battle.\n");
+            gameText.appendText("You and " + player.getMonster().getName() + "have lost the battle.\n");
 
         } else {
-           // gameText.setText("You and " + player.getMonster().getName() + "are victorious!\n");
+            gameText.appendText("You and " + player.getMonster().getName() + "are victorious!\n");
         }
     }
 }

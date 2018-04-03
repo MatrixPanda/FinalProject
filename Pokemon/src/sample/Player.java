@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 
 
 // Represents	players	in	general
-abstract public class Player extends Controller{
+abstract public class Player {
 
     Monster monster;
 

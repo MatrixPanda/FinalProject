@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="border-pane" stylesheets="@Styling.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
@@ -23,9 +24,12 @@
       </TextArea>
    </bottom>
    <right>
-      <TextArea fx:id="gameText" prefHeight="243.0" prefWidth="399.0" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="gameText" prefHeight="243.0" prefWidth="288.0" BorderPane.alignment="CENTER" />
    </right>
+   <center>
+      <ListView fx:id="randomPokemonList" onMouseClicked="#displaySelected" prefHeight="243.0" prefWidth="333.0" styleClass="list-view" BorderPane.alignment="CENTER" />
+   </center>
    <left>
-      <ListView fx:id="randomPokemonList" onMouseClicked="#displaySelected" prefHeight="175.0" prefWidth="206.0" styleClass="list-view" BorderPane.alignment="CENTER" />
+      <TextField fx:id="textField" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>
