@@ -1,0 +1,16 @@
+.test-button {
+    -fx-background-image: url("images/pokeball.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;
+    -fx-background-color: navy;
+    -fx-text-fill: white;
+
+
+}
+
+.list-view {
+    -fx-background-color: #ffe359;
+    -fx-border-color: #ffe359;
+}
+
