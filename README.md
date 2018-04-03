@@ -19,3 +19,7 @@ UI designer
 To Run Code, in multiplayer run server, client 1, then client 2
 Single player just run after game is over sends score data to server, server writes score to file.
 OPEN pokemon folder to see UI had some integration issues earlier with our codes.
+ for pokemon folder:
+1. Select your Pokemon in the second window
+2. Type in the Move you want to use
+3. Press the button to start battle
