@@ -1,0 +1,1 @@
+Trying to get the waiting for other player to connect working. However players are able to send atk dmg over to server, and downloaded by other player.
