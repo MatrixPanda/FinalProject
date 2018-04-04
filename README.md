@@ -23,7 +23,7 @@ Gradle build
 Adonis:
 UI designer
 
-All agreed to had in a day late for more improvements.
+All agreed to hand in a day late for more improvements.
 
 To Run Code, in multiplayer run server, client 1, then client 2
 Single player just run after game is over sends score data to server, server writes score to file.
