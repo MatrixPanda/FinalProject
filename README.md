@@ -9,7 +9,7 @@ TimeThread in singler player,
 Zehan/Adonis made the random pokemon list,
 
 Zehan Apr 03: 
-Major improvements and a lot more tidy that Apr 2 commit, 
+Major improvements and a lot more tidy than Apr 2 commit, 
 Improved UI design and integration. 
 Server can save as many files as u send, name is based 
 on Date d = new date.
