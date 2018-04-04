@@ -1,6 +1,0 @@
-Tyranitar,Rock,175,169,130,81,Stone Edge,Crunch,Earthquake,Fire Punch
-Blaziken,Fire,155,154,90,100,Flare Blitz,High Jump Kick,Stone Edge,Knock Off
-MEGA Charizard Y,Fire,153,170,98,132,Fire Blast,Solar Beam,Air Slash,Focus Blast
-MEGA Gengar,Ghost,135,190,100,165,Shadow Ball,Sludge Wave,Focus Blast,Hex
-Garchomp,Dragon,183,165,115,122,Dragon Claw,Earthquake,Fire Blast,Stone Edge
-Zapdos,Electric,165,145,105,132,Thunder,Heat Wave,Hidden Power Ice,Air Slash

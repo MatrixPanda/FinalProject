@@ -1,2 +1,0 @@
-Tyranitar,Rock,240,45,49,49
-Blaziken,Fire,240,50,60,40
